@@ -1,11 +1,17 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Generated;
+
 
 public class Shop {
 		
 	private List<Product> products;
+	private final static String SEPARATOR = ",";
 	
 	public Shop(){
 		products = new ArrayList<Product>();
@@ -41,5 +47,35 @@ public class Shop {
 		this.products = products;
 	}
 	
-	
+	public boolean importData(String path) {
+		
+		boolean imported = false;
+		
+		BufferedReader br = null;
+		
+		
+	      try {
+	    	 
+	         br =new BufferedReader(new FileReader(path));
+	         br.readLine();
+	         String line = br.readLine();
+	         
+	         while (line != null) {
+	            String [] fields = line.split(SEPARATOR);
+	            List<String> temp = new ArrayList<>();
+	            temp.add(fields[1]);
+	            
+	            imported = addProduct(fields[0],temp, Double.parseDouble(fields[2]), Double.parseDouble(fields[3]),
+	            		Integer.parseInt(fields[4]), Integer.parseInt(fields[5]));
+	            
+	            line = br.readLine();
+	            
+	         }
+	         
+	      } catch (Exception e) {
+	         
+	      }
+	      
+	      return imported;
+	}
 }

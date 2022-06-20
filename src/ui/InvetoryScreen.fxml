@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="670.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="118.0" layoutY="42.0" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="txtSearchProduct" layoutX="118.0" layoutY="42.0" onKeyReleased="#typingProduct" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="13.0" />
          </font>
