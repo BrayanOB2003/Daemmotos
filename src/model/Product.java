@@ -9,6 +9,7 @@ public class Product {
 	private double pricePurchase;
 	private double priceSale;
 	private int quantity;
+	private int sales;
 	
 	public Product(String name, List<String> reference, double pricePurchase,double priceSale, int code, int quantity) {
 		this.name = name;
@@ -17,6 +18,7 @@ public class Product {
 		this.quantity = quantity;
 		this.code = generateCode(code);
 		this.priceSale = priceSale;
+		setSales(0);
 	}
 	
 	public Product() {
@@ -29,13 +31,17 @@ public class Product {
 		int charactersLimit = 3;
 		
 		for(int i = 0; i < charactersLimit; i++) {
-			characterCode += name.charAt(i);
+			characterCode += String.valueOf(name.charAt(i)).toUpperCase();
 		}
 		
-		characterCode += code;
+		characterCode += String.format("%03d", code);
 		
 		
 		return characterCode;
+	}
+	
+	public void makeSales(int sale) {
+		setSales(getSales() + sale);
 	}
 	
 	public double generatePriceSale(double pricePurchase) {
@@ -92,5 +98,13 @@ public class Product {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public int getSales() {
+		return sales;
+	}
+
+	public void setSales(int sales) {
+		this.sales = sales;
 	}
 }

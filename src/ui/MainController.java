@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -168,6 +171,13 @@ public class MainController {
        
     	
     	if(addNewProduct()) {
+    		
+    		txtName.clear();
+    		txtPricePurchase.clear();
+    		txtPriceSale.clear();
+    		txtQuantity.clear();
+    		txtReferences.clear();
+    		
     		alert.setTitle("Info");
 	        alert.setContentText("Se agregó el producto.");
 	        alert.showAndWait();
@@ -210,16 +220,36 @@ public class MainController {
 		
 		buttonAddNewProduct.setStyle("");
 		buttonInventory.setStyle("-fx-background-color: #00BFFF");
+		
+		loadInventory();
     }
     
     private void loadInventory() {
     	
+    	ObservableList<Product> data = FXCollections.observableArrayList(shop.getProducts());
+    	 
+    	columnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+    	columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    	columnQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    	columnSales.setCellValueFactory(new PropertyValueFactory<>("sales"));
+    	
+        tableInventory.setItems(data);
     }
     
     @FXML
     public void addReference(ActionEvent event) {
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
     	if(!txtReferences.getText().isEmpty()) {
     		references.add(txtReferences.getText());
+    		txtReferences.clear();
+    		alert.setTitle("Info");
+	        alert.setContentText("Referencia agregada.");
+	        alert.showAndWait();
+    	} else {
+    		alert.setTitle("Info");
+	        alert.setContentText("Digita una referencia.");
+	        alert.showAndWait();
     	}
     }
 
