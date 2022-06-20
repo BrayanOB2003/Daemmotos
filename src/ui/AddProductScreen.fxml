@@ -7,7 +7,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="169.0" layoutY="87.0" text="Nombre:">
@@ -15,41 +14,41 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="297.0" layoutY="87.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="txtName" layoutX="297.0" layoutY="87.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
       <Line endX="66.0" layoutX="398.0" layoutY="112.0" startX="-100.0" />
       <Label layoutX="135.0" layoutY="149.0" text="Precio de compra:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="297.0" layoutY="148.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="txtPricePurchase" layoutX="297.0" layoutY="148.0" onKeyPressed="#putValuePurchase" onKeyReleased="#priceChangePurchase" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
       <Line endX="66.0" layoutX="398.0" layoutY="173.0" startX="-100.0" />
       <Label layoutX="143.0" layoutY="218.0" text="Precio de venta:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="297.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="txtPriceSale" layoutX="297.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
       <Line endX="66.0" layoutX="398.0" layoutY="242.0" startX="-100.0" />
       <Label layoutX="166.0" layoutY="284.0" text="Cantidad:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="297.0" layoutY="283.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="txtQuantity" layoutX="297.0" layoutY="283.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
       <Line endX="66.0" layoutX="398.0" layoutY="308.0" startX="-100.0" />
       <Label layoutX="157.0" layoutY="347.0" text="Referencias:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="294.0" layoutY="347.0" prefHeight="25.0" prefWidth="167.0" />
-      <Button layoutX="461.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="34.0" text="+">
+      <TextField fx:id="txtReferences" layoutX="294.0" layoutY="347.0" prefHeight="25.0" prefWidth="167.0" />
+      <Button layoutX="461.0" layoutY="346.0" mnemonicParsing="false" onAction="#addReference" prefHeight="25.0" prefWidth="34.0" text="+">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="238.0" layoutY="418.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="154.0" text="Agregar">
+      <Button layoutX="238.0" layoutY="418.0" mnemonicParsing="false" onAction="#addNewProduct" prefHeight="27.0" prefWidth="154.0" text="Agregar">
          <font>
             <Font size="24.0" />
          </font>

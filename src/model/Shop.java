@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
@@ -7,11 +8,11 @@ public class Shop {
 	private List<Product> products;
 	
 	public Shop(){
-		
+		products = new ArrayList<Product>();
 	}
 	
-	public boolean addProduct(String name, List<String> reference, double pricePurchase, int code, int quantity) {
-		Product newProduct = new Product(name, reference, pricePurchase, code, quantity);
+	public boolean addProduct(String name, List<String> reference, double pricePurchase, double priceSale, int code, int quantity) {
+		Product newProduct = new Product(name, reference, pricePurchase, priceSale, code, quantity);
 		
 		try {
 			products.add(newProduct);
@@ -31,4 +32,14 @@ public class Shop {
 		}
 		return -1;
 	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	
 }

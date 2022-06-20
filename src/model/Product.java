@@ -10,12 +10,17 @@ public class Product {
 	private double priceSale;
 	private int quantity;
 	
-	public Product(String name, List<String> reference, double pricePurchase, int code, int quantity) {
+	public Product(String name, List<String> reference, double pricePurchase,double priceSale, int code, int quantity) {
 		this.name = name;
 		this.references = reference;
 		this.pricePurchase = pricePurchase;
 		this.quantity = quantity;
 		this.code = generateCode(code);
+		this.priceSale = priceSale;
+	}
+	
+	public Product() {
+		
 	}
 	
 	private String generateCode(int code) {
@@ -31,6 +36,14 @@ public class Product {
 		
 		
 		return characterCode;
+	}
+	
+	public double generatePriceSale(double pricePurchase) {
+		double aux = 0;
+		
+		aux = (pricePurchase*0.19) + (pricePurchase*0.5) + pricePurchase;
+		
+		return aux;
 	}
 	
 	public String getName() {
