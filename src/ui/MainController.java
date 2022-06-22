@@ -115,7 +115,6 @@ public class MainController {
 		
 		buttonInventory.setStyle("");
 		buttonAddNewProduct.setStyle("");
-		buttonAddOldProduct.setStyle("");
 		buttonMakeSale.setStyle("-fx-background-color: #00BFFF");
 		
 		saleController.loadInformation(shop);
@@ -133,7 +132,6 @@ public class MainController {
 		newScreen.getChildren().add(root);
 		
 		buttonInventory.setStyle("");
-		buttonAddOldProduct.setStyle("");
 		buttonMakeSale.setStyle("");
 		buttonAddNewProduct.setStyle("-fx-background-color: #00BFFF");
 		
@@ -246,7 +244,6 @@ public class MainController {
 		newScreen.getChildren().clear();
 		newScreen.getChildren().add(root);
 		
-		buttonAddOldProduct.setStyle("");
 		buttonMakeSale.setStyle("");
 		buttonAddNewProduct.setStyle("");
 		buttonInventory.setStyle("-fx-background-color: #00BFFF");
