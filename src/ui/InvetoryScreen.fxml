@@ -15,7 +15,7 @@
             <Font size="13.0" />
          </font>
       </TextField>
-      <TableView fx:id="tableInventory" layoutX="74.0" layoutY="118.0" prefHeight="349.0" prefWidth="523.0">
+      <TableView fx:id="tableInventory" layoutX="74.0" layoutY="118.0" prefHeight="370.0" prefWidth="520.0">
         <columns>
           <TableColumn fx:id="columnCode" minWidth="0.0" prefWidth="78.0" resizable="false" text="Código" />
           <TableColumn fx:id="columnName" prefWidth="148.0" resizable="false" text="Nombre" />

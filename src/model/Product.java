@@ -18,7 +18,7 @@ public class Product {
 		this.quantity = quantity;
 		this.code = generateCode(code);
 		this.priceSale = priceSale;
-		setSales(0);
+		this.sales = 0;
 	}
 	
 	public Product() {

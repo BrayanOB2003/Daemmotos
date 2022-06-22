@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
 
 
 public class Shop {
@@ -65,8 +64,10 @@ public class Shop {
 	            List<String> temp = new ArrayList<>();
 	            temp.add(fields[1]);
 	            
-	            imported = addProduct(fields[0],temp, Double.parseDouble(fields[2]), Double.parseDouble(fields[3]),
-	            		Integer.parseInt(fields[4]), Integer.parseInt(fields[5]));
+	            Product pr = new Product();
+	            
+	            imported = addProduct(fields[0],temp, Double.parseDouble(fields[2]), pr.generatePriceSale(Double.parseDouble(fields[3])),
+	            		Integer.parseInt(fields[4]), Integer.parseInt(fields[4]));
 	            
 	            line = br.readLine();
 	            

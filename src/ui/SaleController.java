@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,12 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import model.Product;
 import model.Shop;
 
-public class InventoryController {
+public class SaleController {
 	
-	//View inventory
 	@FXML
     private TableColumn<Product, String> columnCode;
 
@@ -25,51 +27,47 @@ public class InventoryController {
     private TableColumn<Product, String> columnName;
 
     @FXML
-    private TableColumn<Product, Integer> columnQuantity;
+    private TableView<Product> tableProducts;
 
     @FXML
-    private TableColumn<Product, Integer> columnSales;
+    private TextField txtCode;
 
-    @FXML
-    private TableView<Product> tableInventory;
-    
-    @FXML
-    private TextField txtSearchProduct;
-    
-    //View product information
     @FXML
     private TextField txtName;
-
-    @FXML
-    private TextField txtPricePurchase;
-
-    @FXML
-    private TextField txtPriceSale;
 
     @FXML
     private TextField txtQuantity;
 
     @FXML
-    private TextField txtQuantity1;
-    
+    private TextField txtSearchProduct;
+
     private Shop shop;
+    private Product selectedProduct;
+    private int productIndex;
     
-    public InventoryController() {
+    
+    public SaleController() {
     	
     }
     
     public void loadInformation(Shop shop) {
-    	
     	this.shop = shop;
     	
     	ObservableList<Product> data = FXCollections.observableArrayList(shop.getProducts());
     	 
     	columnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
     	columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-    	columnQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-    	columnSales.setCellValueFactory(new PropertyValueFactory<>("sales"));
     	
-        tableInventory.setItems(data);
+        tableProducts.setItems(data);
+        tableProducts.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+        	if(tableProducts.getSelectionModel().getSelectedItem() != null) {
+        		selectedProduct = tableProducts.getSelectionModel().getSelectedItem();
+        		productIndex = shop.getProducts().indexOf(selectedProduct);
+        		
+        		txtCode.setText(selectedProduct.getCode());
+        		txtName.setText(selectedProduct.getName());
+        	}
+        });
     }
     
     private void loadInventory(List<Product> list) {
@@ -77,15 +75,21 @@ public class InventoryController {
    	 
     	columnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
     	columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-    	columnQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-    	columnSales.setCellValueFactory(new PropertyValueFactory<>("sales"));
     	
-        tableInventory.setItems(data);
-    }
+        tableProducts.setItems(data);
+        tableProducts.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+        	if(tableProducts.getSelectionModel().getSelectedItem() != null) {
+        		selectedProduct = tableProducts.getSelectionModel().getSelectedItem();
+        		productIndex = shop.getProducts().indexOf(selectedProduct);
+        		
+        		txtCode.setText(selectedProduct.getCode());
+        		txtName.setText(selectedProduct.getName());
+        	}
+        });
+    } 
     
     @FXML
     public void typingProduct(KeyEvent event) {
-    	
     	if(!txtSearchProduct.getText().isEmpty() || (!txtSearchProduct.getText().isEmpty() && event.getCode() == KeyCode.DELETE)) {
     		String characters = txtSearchProduct.getText();
     		int size = characters.length();
@@ -105,12 +109,9 @@ public class InventoryController {
     }
     
     @FXML
-    public void SaveChanges(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void activeFields(ActionEvent event) {
-
+    public void makeSale(ActionEvent event) {
+    	if() {
+    		
+    	}
     }
 }

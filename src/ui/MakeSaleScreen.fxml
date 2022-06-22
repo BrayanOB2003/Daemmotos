@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableProducts" layoutX="48.0" layoutY="159.0" prefHeight="336.0" prefWidth="250.0" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="159.0">
+        <columns>
+          <TableColumn fx:id="columnCode" prefWidth="85.0" text="Código" />
+          <TableColumn fx:id="columnName" prefWidth="164.0" text="Nombre" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtSearchProduct" layoutX="96.0" layoutY="52.0" onKeyReleased="#typingProduct" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: transparent;">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="52.0" layoutY="54.0" text="Buscar:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="197.0" layoutY="79.0" startX="-100.0" />
+      <Label layoutX="388.0" layoutY="159.0" text="Código" />
+      <TextField fx:id="txtCode" editable="false" layoutX="372.0" layoutY="180.0" prefHeight="25.0" prefWidth="73.0" />
+      <Button layoutX="396.0" layoutY="448.0" mnemonicParsing="false" onAction="#makeSale" prefHeight="47.0" prefWidth="176.0" text="Hacer venta">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="447.0" layoutY="110.0" text="Producto">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="520.0" layoutY="159.0" text="Nombre" />
+      <TextField fx:id="txtName" editable="false" layoutX="463.0" layoutY="180.0" prefHeight="25.0" prefWidth="162.0" />
+      <TextField fx:id="txtQuantity" layoutX="374.0" layoutY="252.0" prefHeight="25.0" prefWidth="73.0" />
+      <Label layoutX="384.0" layoutY="235.0" text="Cantidad" />
+      <Label layoutX="80.0" layoutY="110.0" text="Selecciona un producto">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

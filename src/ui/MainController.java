@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
-
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import model.Product;
 import model.Shop;
 
@@ -33,7 +29,7 @@ public class MainController {
 	//Main components
 	
 	@FXML
-    private Button bottonMakeSale;
+    private Button buttonMakeSale;
 
     @FXML
     private Button buttonAddNewProduct;
@@ -72,6 +68,8 @@ public class MainController {
     
     private InventoryController inventoryController;
     
+    private SaleController saleController;
+    
     private Shop shop;
     
     private Product product;
@@ -81,7 +79,8 @@ public class MainController {
     public MainController() {
     	shop = new Shop();
     	references = new ArrayList<>();
-    	inventoryController = new InventoryController(shop);
+    	inventoryController = new InventoryController();
+    	saleController = new SaleController();
 	}
     
     //Add numeric text formatting to text fields
@@ -107,8 +106,22 @@ public class MainController {
     }
     
     @FXML
-    public void makeSale(ActionEvent event) {
-    	
+    public void makeSale(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MakeSaleScreen.fxml"));
+		
+		fxmlLoader.setController(saleController);
+		
+		Parent root = fxmlLoader.load();
+		
+		newScreen.getChildren().clear();
+		newScreen.getChildren().add(root);
+		
+		buttonInventory.setStyle("");
+		buttonAddNewProduct.setStyle("");
+		buttonAddOldProduct.setStyle("");
+		buttonMakeSale.setStyle("-fx-background-color: #00BFFF");
+		
+		saleController.loadInformation(shop);
     }
 
     @FXML
@@ -123,6 +136,8 @@ public class MainController {
 		newScreen.getChildren().add(root);
 		
 		buttonInventory.setStyle("");
+		buttonAddOldProduct.setStyle("");
+		buttonMakeSale.setStyle("");
 		buttonAddNewProduct.setStyle("-fx-background-color: #00BFFF");
 		
 		initNumberFormatTextField();
@@ -238,10 +253,12 @@ public class MainController {
 		newScreen.getChildren().clear();
 		newScreen.getChildren().add(root);
 		
+		buttonAddOldProduct.setStyle("");
+		buttonMakeSale.setStyle("");
 		buttonAddNewProduct.setStyle("");
 		buttonInventory.setStyle("-fx-background-color: #00BFFF");
 		
-		inventoryController.loadInventory();
+		inventoryController.loadInformation(shop);
 		
     }
     
