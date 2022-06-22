@@ -142,6 +142,29 @@ public class SaleController {
     		shop.getProducts().set(productIndex, selectedProduct);
     		alert.setContentText("Venta efectuada.");
     		alert.showAndWait();
+    		txtCode.clear();
+    		txtName.clear();
+    		txtQuantity.clear();
+    	} else {
+    		alert.setContentText("Falta información.");
+    		alert.showAndWait();
+    	}
+    }
+    
+    @FXML
+    public void makePurchase(ActionEvent event) {
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Info");
+    	
+    	if(!txtName.getText().isEmpty() && !txtCode.getText().isEmpty() && !txtQuantity.getText().isEmpty()) {
+    		selectedProduct.makePurchase(Integer.parseInt(txtQuantity.getText()));
+    		shop.getProducts().set(productIndex, selectedProduct);
+    		alert.setContentText("Compra efectuada.");
+    		alert.showAndWait();
+    		txtCode.clear();
+    		txtName.clear();
+    		txtQuantity.clear();
     	} else {
     		alert.setContentText("Falta información.");
     		alert.showAndWait();

@@ -41,7 +41,12 @@ public class Product {
 	}
 	
 	public void makeSales(int sale) {
-		setSales(getSales() + sale);
+		sales += sale;
+		quantity -= sale;
+	}
+	
+	public void makePurchase(int purchase) {
+		quantity += purchase;
 	}
 	
 	public double generatePriceSale(double pricePurchase) {
@@ -102,9 +107,5 @@ public class Product {
 
 	public int getSales() {
 		return sales;
-	}
-
-	public void setSales(int sales) {
-		this.sales = sales;
 	}
 }

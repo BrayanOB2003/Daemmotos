@@ -35,9 +35,6 @@ public class MainController {
     private Button buttonAddNewProduct;
 
     @FXML
-    private Button buttonAddOldProduct;
-
-    @FXML
     private Button buttonInventory;
 
 	@FXML
@@ -184,6 +181,7 @@ public class MainController {
 	        alert.setContentText("Se agregó el producto.");
 	        alert.showAndWait();
     	} else {
+    		
 	        alert.setContentText("Falta información.");
 	        alert.showAndWait();
     	}
@@ -234,11 +232,6 @@ public class MainController {
 
     @FXML
     public void putValuePurchase(KeyEvent event) {
-    	
-    }
-    
-    @FXML
-    public void openAddOldProduct(ActionEvent event) {
     	
     }
 

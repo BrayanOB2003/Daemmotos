@@ -93,9 +93,8 @@
         <AnchorPane>
                <children>
                   <Button fx:id="buttonInventory" layoutX="29.0" layoutY="51.0" mnemonicParsing="false" onAction="#openInventory" prefHeight="37.0" prefWidth="165.0" text="Inventario" />
-                  <Button fx:id="buttonMakeSale" layoutX="29.0" layoutY="205.0" mnemonicParsing="false" onAction="#makeSale" prefHeight="37.0" prefWidth="165.0" text="Hacer venta" />
+                  <Button fx:id="buttonMakeSale" layoutX="29.0" layoutY="158.0" mnemonicParsing="false" onAction="#makeSale" prefHeight="37.0" prefWidth="165.0" text="Hacer compra y venta" />
                   <Button fx:id="buttonAddNewProduct" layoutX="29.0" layoutY="102.0" mnemonicParsing="false" onAction="#openAddNewProduct" prefHeight="37.0" prefWidth="165.0" text="Agregar nuevo producto" />
-                  <Button fx:id="buttonAddOldProduct" layoutX="29.0" layoutY="152.0" mnemonicParsing="false" onAction="#openAddOldProduct" prefHeight="37.0" prefWidth="165.0" text="Agregar producto existente" />
                </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
