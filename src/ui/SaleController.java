@@ -146,7 +146,7 @@ public class SaleController {
     		txtName.clear();
     		txtQuantity.clear();
     	} else {
-    		alert.setContentText("Falta información.");
+    		alert.setContentText("Falta informaciÃ³n.");
     		alert.showAndWait();
     	}
     }
@@ -166,7 +166,7 @@ public class SaleController {
     		txtName.clear();
     		txtQuantity.clear();
     	} else {
-    		alert.setContentText("Falta información.");
+    		alert.setContentText("Falta informaciÃ³n.");
     		alert.showAndWait();
     	}
     }
