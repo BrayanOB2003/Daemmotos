@@ -1,16 +1,18 @@
 package ui;
 
 import java.util.List;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -50,6 +52,26 @@ public class SaleController {
     	
     }
     
+    public void initialize() {
+    	initNumberFormatTextField();
+    }
+    
+    private void initNumberFormatTextField() {   
+    	UnaryOperator<Change> filter = change -> {
+    	    String text = change.getText();
+
+    	    if (text.matches("[0-9]*")) {
+    	        return change;
+    	    }
+    	    
+    	    return null;
+    	};
+    	
+    	TextFormatter<String> formatter1 = new TextFormatter<>(filter);
+    	
+    	txtQuantity.setTextFormatter(formatter1);
+    }
+    
     public void loadInformation(Shop shop) {
     	this.shop = shop;
     	
@@ -72,7 +94,7 @@ public class SaleController {
     
     private void loadInventory(List<Product> list) {
     	ObservableList<Product> data = FXCollections.observableArrayList(list);
-   	 
+   	 	
     	columnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
     	columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
     	
@@ -110,8 +132,19 @@ public class SaleController {
     
     @FXML
     public void makeSale(ActionEvent event) {
-    	if() {
-    		
+    	
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Info");
+    	
+    	if(!txtName.getText().isEmpty() && !txtCode.getText().isEmpty() && !txtQuantity.getText().isEmpty()) {
+    		selectedProduct.makeSales(Integer.parseInt(txtQuantity.getText()));
+    		shop.getProducts().set(productIndex, selectedProduct);
+    		alert.setContentText("Venta efectuada.");
+    		alert.showAndWait();
+    	} else {
+    		alert.setContentText("Falta información.");
+    		alert.showAndWait();
     	}
     }
 }
