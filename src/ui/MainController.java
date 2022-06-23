@@ -25,7 +25,6 @@ import model.Shop;
 
 public class MainController {
 	
-	
 	//Main components
 	
 	@FXML
@@ -76,8 +75,8 @@ public class MainController {
     public MainController() {
     	shop = new Shop();
     	references = new ArrayList<>();
-    	inventoryController = new InventoryController();
-    	saleController = new SaleController();
+    	inventoryController = new InventoryController(shop);
+    	saleController = new SaleController(shop);
 	}
     
     //Add numeric text formatting to text fields
@@ -117,7 +116,6 @@ public class MainController {
 		buttonAddNewProduct.setStyle("");
 		buttonMakeSale.setStyle("-fx-background-color: #00BFFF");
 		
-		saleController.loadInformation(shop);
     }
 
     @FXML
@@ -176,11 +174,11 @@ public class MainController {
     		txtQuantity.clear();
     		txtReferences.clear();
     		
-	        alert.setContentText("Se agregó el producto.");
+	        alert.setContentText("Se agregï¿½ el producto.");
 	        alert.showAndWait();
     	} else {
     		
-	        alert.setContentText("Falta información.");
+	        alert.setContentText("Falta informaciï¿½n.");
 	        alert.showAndWait();
     	}
     }
@@ -247,9 +245,6 @@ public class MainController {
 		buttonMakeSale.setStyle("");
 		buttonAddNewProduct.setStyle("");
 		buttonInventory.setStyle("-fx-background-color: #00BFFF");
-		
-		inventoryController.loadInformation(shop);
-		
     }
     
     @FXML

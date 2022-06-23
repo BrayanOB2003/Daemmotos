@@ -61,12 +61,11 @@ public class Shop {
 	         
 	         while (line != null) {
 	            String [] fields = line.split(SEPARATOR);
-	            List<String> temp = new ArrayList<>();
-	            temp.add(fields[1]);
-	            
 	            Product pr = new Product();
+	            List<String> references = new ArrayList<>();
+	            references.add(fields[1]);
 	            
-	            imported = addProduct(fields[0],temp, Double.parseDouble(fields[2]), pr.generatePriceSale(Double.parseDouble(fields[3])),
+	            imported = addProduct(fields[0],references, Double.parseDouble(fields[2]), pr.generatePriceSale(Double.parseDouble(fields[3])),
 	            		Integer.parseInt(fields[4]), Integer.parseInt(fields[4]));
 	            
 	            line = br.readLine();

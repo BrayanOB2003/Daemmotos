@@ -1,8 +1,12 @@
 package model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Product {
+	
+	private final static String SEPARATOR = ",";
+	
 	private String name;
 	private List<String> references;
 	private String code;
@@ -11,9 +15,9 @@ public class Product {
 	private int quantity;
 	private int sales;
 	
-	public Product(String name, List<String> reference, double pricePurchase,double priceSale, int code, int quantity) {
+	public Product(String name, List<String> references, double pricePurchase,double priceSale, int code, int quantity) {
 		this.name = name;
-		this.references = reference;
+		this.references = references;
 		this.pricePurchase = pricePurchase;
 		this.quantity = quantity;
 		this.code = generateCode(code);
@@ -65,14 +69,27 @@ public class Product {
 		this.name = name;
 	}
 
-	public List<String> getReferences() {
-		return references;
+	public String getReferences() {
+		String temp = "";
+		
+		for(int i = 0; i < references.size(); i++) {
+			
+			if(i == references.size()-1) {
+				temp += references.get(i);
+			} else {
+				temp += references.get(i) + SEPARATOR;
+			}
+		}
+		
+		return temp;
 	}
 
-	public void setReferences(List<String> references) {
-		this.references = references;
+	public void setReferences(String txt) {
+		txt.replace(" ", "");
+		String[] references = txt.split(SEPARATOR);
+		this.references = Arrays.asList(references);
 	}
-
+	
 	public double getPricePurchase() {
 		return pricePurchase;
 	}

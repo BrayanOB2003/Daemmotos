@@ -48,11 +48,12 @@ public class SaleController {
     private int productIndex;
     
     
-    public SaleController() {
-    	
+    public SaleController(Shop shop) {
+    	this.shop = shop;
     }
     
     public void initialize() {
+    	loadInformation();
     	initNumberFormatTextField();
     }
     
@@ -72,8 +73,7 @@ public class SaleController {
     	txtQuantity.setTextFormatter(formatter1);
     }
     
-    public void loadInformation(Shop shop) {
-    	this.shop = shop;
+    public void loadInformation() {
     	
     	ObservableList<Product> data = FXCollections.observableArrayList(shop.getProducts());
     	 
@@ -126,7 +126,7 @@ public class SaleController {
         	
         	loadInventory(searches);
     	} else {
-    		loadInformation(shop);
+    		loadInformation();
     	}
     }
     

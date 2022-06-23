@@ -1,17 +1,24 @@
 package ui;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Product;
 import model.Shop;
 
@@ -36,31 +43,20 @@ public class InventoryController {
     @FXML
     private TextField txtSearchProduct;
     
-    //View product information
-    @FXML
-    private TextField txtName;
-
-    @FXML
-    private TextField txtPricePurchase;
-
-    @FXML
-    private TextField txtPriceSale;
-
-    @FXML
-    private TextField txtQuantity;
-
-    @FXML
-    private TextField txtQuantity1;
+    private ViewInformationController infoController;
     
     private Shop shop;
     
-    public InventoryController() {
-    	
+    public InventoryController(Shop shop) {
+    	this.shop = shop;
+    	infoController = new ViewInformationController(shop);
     }
     
-    public void loadInformation(Shop shop) {
-    	
-    	this.shop = shop;
+    public void initialize() {
+    	loadInformation();
+    }
+    
+    public void loadInformation() {
     	
     	ObservableList<Product> data = FXCollections.observableArrayList(shop.getProducts());
     	 
@@ -70,6 +66,40 @@ public class InventoryController {
     	columnSales.setCellValueFactory(new PropertyValueFactory<>("sales"));
     	
         tableInventory.setItems(data);
+        tableInventory.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+        	if(tableInventory.getSelectionModel().getSelectedItem() != null) {
+        		try {
+					showInfoScreen(tableInventory.getSelectionModel().getSelectedIndex());
+				} catch (IOException e1) {
+					
+				}
+        	}
+        });
+    }
+    
+    private void showInfoScreen(int productIndex) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewInformation.fxml"));
+		
+    	
+		fxmlLoader.setController(infoController);
+
+		infoController.setIndexProduct(productIndex);
+		
+		Parent root = fxmlLoader.load();
+		
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Producto");
+		stage.setResizable(false);
+		
+		infoController.setIndexProduct(productIndex);
+		
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, e ->{
+			tableInventory.refresh();
+		});
+		stage.showAndWait();
     }
     
     private void loadInventory(List<Product> list) {
@@ -100,7 +130,7 @@ public class InventoryController {
         	
         	loadInventory(searches);
     	} else {
-    		loadInformation(shop);
+    		loadInformation();
     	}
     }
     
