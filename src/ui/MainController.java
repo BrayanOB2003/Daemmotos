@@ -145,8 +145,9 @@ public class MainController {
     				
     				int incrementalCode = shop.getProducts().size() + 1;
 
-    				shop.addProduct(txtName.getText(), references,Double.parseDouble(txtPricePurchase.getText()), 
+    				shop.addProduct(txtName.getText(), new ArrayList<>(references),Double.parseDouble(txtPricePurchase.getText()), 
     						Double.parseDouble(txtPriceSale.getText()),incrementalCode,Integer.parseInt(txtQuantity.getText()));
+    				references.clear();
     				return true;
     			} else {
     				return false;
@@ -174,11 +175,11 @@ public class MainController {
     		txtQuantity.clear();
     		txtReferences.clear();
     		
-	        alert.setContentText("Se agreg� el producto.");
+	        alert.setContentText("Se agrego el producto.");
 	        alert.showAndWait();
     	} else {
     		
-	        alert.setContentText("Falta informaci�n.");
+	        alert.setContentText("Falta informacion.");
 	        alert.showAndWait();
     	}
     }
@@ -218,11 +219,45 @@ public class MainController {
     }
     
     @FXML
+    public void exportData(ActionEvent event) {
+    	boolean exported = false;
+    	
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Info");
+    	
+    	try {
+    		FileChooser fileChooser = new FileChooser();
+        	fileChooser.setTitle("Selecciona un directorio");
+        	
+        	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files","*.csv");
+            
+        	fileChooser.getExtensionFilters().add(extFilter);
+        	
+        	File file = fileChooser.showSaveDialog(null);
+        	exported = shop.exportData(file.getAbsolutePath());
+        	
+    	} catch (Exception e){
+    		exported = false;
+    	}
+    	
+    	if(exported) {
+    		alert.setContentText("Se exportaron los datos.");
+	        alert.showAndWait();
+    	} else {
+    		alert.setContentText("No se pudieron exportar los datos.");
+	        alert.showAndWait();
+    	}
+    }
+    
+    @FXML
     public void priceChangePurchase(KeyEvent event) {
     	product = new Product();
     	
     	if(!txtPricePurchase.getText().isEmpty() || event.getCode() == KeyCode.DELETE) {
+    		
     		txtPriceSale.setText(String.valueOf((int)product.generatePriceSale(Double.parseDouble(txtPricePurchase.getText()))));
+    	
     	}
     }
 

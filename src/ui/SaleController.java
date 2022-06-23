@@ -138,13 +138,17 @@ public class SaleController {
         alert.setTitle("Info");
     	
     	if(!txtName.getText().isEmpty() && !txtCode.getText().isEmpty() && !txtQuantity.getText().isEmpty()) {
-    		selectedProduct.makeSales(Integer.parseInt(txtQuantity.getText()));
-    		shop.getProducts().set(productIndex, selectedProduct);
-    		alert.setContentText("Venta efectuada.");
-    		alert.showAndWait();
-    		txtCode.clear();
-    		txtName.clear();
-    		txtQuantity.clear();
+    		if(selectedProduct.makeSales(Integer.parseInt(txtQuantity.getText()))) {
+	    		shop.getProducts().set(productIndex, selectedProduct);
+	    		alert.setContentText("Venta efectuada.");
+	    		alert.showAndWait();
+	    		txtCode.clear();
+	    		txtName.clear();
+	    		txtQuantity.clear();
+    		} else {
+    			alert.setContentText("Cantidad de producto insuficiente.");
+	    		alert.showAndWait();
+    		}
     	} else {
     		alert.setContentText("Falta información.");
     		alert.showAndWait();

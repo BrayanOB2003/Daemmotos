@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Product {
 	
-	private final static String SEPARATOR = ",";
+	private final static String REFERENCE_SEPARATOR = "~";
 	
 	private String name;
 	private List<String> references;
@@ -15,7 +15,7 @@ public class Product {
 	private int quantity;
 	private int sales;
 	
-	public Product(String name, List<String> references, double pricePurchase,double priceSale, int code, int quantity) {
+	public Product(String name, List<String> references, double pricePurchase,double priceSale, int code, int quantity) { //New product constructor
 		this.name = name;
 		this.references = references;
 		this.pricePurchase = (double)Math.round(pricePurchase * 100d) / 100d;
@@ -25,7 +25,17 @@ public class Product {
 		this.sales = 0;
 	}
 	
-	public Product() {
+	public Product(String name, List<String> references, double pricePurchase,double priceSale, String code, int quantity, int sales) { //Import to prodcut
+		this.name = name;
+		this.references = references;
+		this.pricePurchase = (double)Math.round(pricePurchase * 100d) / 100d;
+		this.quantity = quantity;
+		this.code = code;
+		this.priceSale = (double)Math.round(priceSale * 100d) / 100d;
+		this.sales = sales;
+	}
+	
+	public Product() { // Defect constructor
 		
 	}
 	
@@ -44,9 +54,14 @@ public class Product {
 		return characterCode;
 	}
 	
-	public void makeSales(int sale) {
-		sales += sale;
-		quantity -= sale;
+	public boolean makeSales(int sale) {
+		if(sale <= quantity) {
+			sales += sale;
+			quantity -= sale;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public void makePurchase(int purchase) {
@@ -77,7 +92,7 @@ public class Product {
 			if(i == references.size()-1) {
 				temp += references.get(i);
 			} else {
-				temp += references.get(i) + SEPARATOR;
+				temp += references.get(i) + REFERENCE_SEPARATOR;
 			}
 		}
 		
@@ -86,7 +101,7 @@ public class Product {
 
 	public void setReferences(String txt) {
 		txt.replace(" ", "");
-		String[] references = txt.split(SEPARATOR);
+		String[] references = txt.split(REFERENCE_SEPARATOR);
 		this.references = Arrays.asList(references);
 	}
 	
