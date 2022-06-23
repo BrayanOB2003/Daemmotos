@@ -66,6 +66,8 @@ public class MainController {
     
     private SaleController saleController;
     
+    private  boolean imported;
+    
     private Shop shop;
     
     private Product product;
@@ -77,7 +79,15 @@ public class MainController {
     	references = new ArrayList<>();
     	inventoryController = new InventoryController(shop);
     	saleController = new SaleController(shop);
-	}
+    	imported = false;
+    }
+    
+    public void initialize() {
+    	if(!imported) {
+        	importData("src/data/data.csv");  
+        	imported = true;
+    	}
+    }
     
     //Add numeric text formatting to text fields
     private void initNumberFormatTextField() {   
@@ -99,6 +109,17 @@ public class MainController {
     	txtPricePurchase.setTextFormatter(formatter1);
     	txtPriceSale.setTextFormatter(formatter2);
     	txtQuantity.setTextFormatter(formatter3);
+    }
+    
+    @FXML
+    public void clearInvetory(ActionEvent event) {
+    	try {
+    		File file = new File("src/data/data.csv");
+    		file.delete();
+    		shop.getProducts().clear();
+    	} catch(Exception e) {
+    		
+    	}
     }
     
     @FXML
@@ -202,7 +223,7 @@ public class MainController {
             fileChooser.getExtensionFilters().add(extFilter);
         	
         	File file = fileChooser.showOpenDialog(null);
-        	imported = shop.importData(file.getAbsolutePath());
+        	imported = importData(file.getAbsolutePath());
         	
         	
     	} catch (Exception e){
@@ -235,7 +256,7 @@ public class MainController {
         	fileChooser.getExtensionFilters().add(extFilter);
         	
         	File file = fileChooser.showSaveDialog(null);
-        	exported = shop.exportData(file.getAbsolutePath());
+        	exported = exportData(file.getAbsolutePath());
         	
     	} catch (Exception e){
     		exported = false;
@@ -248,6 +269,14 @@ public class MainController {
     		alert.setContentText("No se pudieron exportar los datos.");
 	        alert.showAndWait();
     	}
+    }
+    
+    public boolean exportData(String path) {
+    	return shop.exportData(path);
+    }
+    
+    public boolean importData(String path) {
+    	return shop.importData(path);
     }
     
     @FXML

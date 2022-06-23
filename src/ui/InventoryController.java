@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -66,10 +65,10 @@ public class InventoryController {
     	columnSales.setCellValueFactory(new PropertyValueFactory<>("sales"));
     	
         tableInventory.setItems(data);
-        tableInventory.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+        tableInventory.setOnMouseClicked(e->{
         	if(tableInventory.getSelectionModel().getSelectedItem() != null) {
         		try {
-					showInfoScreen(tableInventory.getSelectionModel().getSelectedIndex());
+					showInfoScreen(shop.getProducts().indexOf(tableInventory.getSelectionModel().getSelectedItem()));
 				} catch (IOException e1) {
 					
 				}

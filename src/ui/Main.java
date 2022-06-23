@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application{
 	
@@ -31,6 +32,12 @@ public class Main extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Dammotos");
 		primaryStage.setResizable(true);
+		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, e->{
+			
+			String path = "src/data/data.csv";
+			
+			mainController.exportData(path);
+		});
 		primaryStage.show();
 	}
 	

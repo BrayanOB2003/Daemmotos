@@ -57,14 +57,10 @@
             <MenuItem mnemonicParsing="false" onAction="#importData" text="Importar datos" />
             <MenuItem mnemonicParsing="false" onAction="#exportData" text="Exportar datos" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
+            <MenuItem mnemonicParsing="false" onAction="#clearInvetory" text="Limpiar inventario" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
@@ -83,7 +79,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem mnemonicParsing="false" text="About Me" />
           </items>
         </Menu>
       </menus>
