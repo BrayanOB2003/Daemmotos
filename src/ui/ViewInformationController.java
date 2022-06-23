@@ -129,7 +129,7 @@ public class ViewInformationController {
     	        
     	        txtReferences.setStyle("");
     	        txtReferences.setEditable(false);
-    	        
+    	        	
         	} else {
         		alert.setContentText("No hay ningún cambio.");
     	        alert.showAndWait();

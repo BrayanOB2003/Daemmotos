@@ -18,10 +18,10 @@ public class Product {
 	public Product(String name, List<String> references, double pricePurchase,double priceSale, int code, int quantity) {
 		this.name = name;
 		this.references = references;
-		this.pricePurchase = pricePurchase;
+		this.pricePurchase = (double)Math.round(pricePurchase * 100d) / 100d;
 		this.quantity = quantity;
 		this.code = generateCode(code);
-		this.priceSale = priceSale;
+		this.priceSale = (double)Math.round(priceSale * 100d) / 100d;
 		this.sales = 0;
 	}
 	
@@ -95,7 +95,7 @@ public class Product {
 	}
 
 	public void setPricePurchase(double pricePurchase) {
-		this.pricePurchase = pricePurchase;
+		this.pricePurchase = (double)Math.round(pricePurchase * 100d) / 100d;
 	}
 
 	public double getPriceSale() {
@@ -103,7 +103,7 @@ public class Product {
 	}
 
 	public void setPriceSale(double priceSale) {
-		this.priceSale = priceSale;
+		this.priceSale = (double)Math.round(priceSale * 100d) / 100d;
 	}
 
 	public int getQuantity() {
