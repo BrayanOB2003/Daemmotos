@@ -84,7 +84,7 @@ public class MainController {
     
     public void initialize() {
     	if(!imported) {
-        	importData("src/data/data.csv");  
+        	importData("data/data.csv");  
         	imported = true;
     	}
     }

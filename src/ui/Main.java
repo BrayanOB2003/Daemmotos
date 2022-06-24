@@ -34,7 +34,7 @@ public class Main extends Application{
 		primaryStage.setResizable(true);
 		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, e->{
 			
-			String path = "src/data/data.csv";
+			String path = "data/data.csv";
 			
 			mainController.exportData(path);
 		});
