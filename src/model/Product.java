@@ -71,7 +71,9 @@ public class Product {
 	public double generatePriceSale(double pricePurchase) {
 		double aux = 0;
 		
-		aux = (pricePurchase*0.19) + (pricePurchase*0.5) + pricePurchase;
+		aux = (pricePurchase*0.19) + pricePurchase;
+		
+		aux = aux + aux*0.3;
 		
 		return aux;
 	}

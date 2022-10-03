@@ -1,11 +1,16 @@
 package ui;
 
+import java.awt.Event;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -27,10 +32,13 @@ public class SaleController {
 
     @FXML
     private TableColumn<Product, String> columnName;
+    
+    @FXML
+    private TableColumn<Product, String> columnPrice;
 
     @FXML
     private TableView<Product> tableProducts;
-
+    
     @FXML
     private TextField txtCode;
 
@@ -39,6 +47,9 @@ public class SaleController {
 
     @FXML
     private TextField txtQuantity;
+    
+    @FXML
+    private TextField txtSaleValue;
 
     @FXML
     private TextField txtSearchProduct;
@@ -79,6 +90,7 @@ public class SaleController {
     	 
     	columnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
     	columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    	columnPrice.setCellValueFactory(new PropertyValueFactory<>("priceSale"));
     	
         tableProducts.setItems(data);
         tableProducts.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -97,6 +109,7 @@ public class SaleController {
    	 	
     	columnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
     	columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    	columnPrice.setCellValueFactory(new PropertyValueFactory<>("priceSale"));
     	
         tableProducts.setItems(data);
         tableProducts.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -129,6 +142,24 @@ public class SaleController {
     		loadInformation();
     	}
     }
+    
+    @FXML
+    void typingQuantity(KeyEvent event) {
+    	if(tableProducts.getSelectionModel().getSelectedItem() != null && !txtQuantity.getText().isEmpty() || 
+    			(!txtSaleValue.getText().isEmpty() && event.getCode() == KeyCode.DELETE)) {
+    		
+    		long quantity = Long.parseLong(txtQuantity.getText());
+    		double price = tableProducts.getSelectionModel().getSelectedItem().getPriceSale();
+    		
+    		long saleValue =(long) price * quantity;   
+    		
+    		txtSaleValue.setText(String.valueOf(saleValue));
+    		
+    	} else {
+    		txtSaleValue.setText("0");
+    	}
+    }
+    
     
     @FXML
     public void makeSale(ActionEvent event) {
@@ -169,6 +200,7 @@ public class SaleController {
     		txtCode.clear();
     		txtName.clear();
     		txtQuantity.clear();
+    		txtSaleValue.clear();
     	} else {
     		alert.setContentText("Falta información.");
     		alert.showAndWait();

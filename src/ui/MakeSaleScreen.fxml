@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -11,48 +12,52 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="tableProducts" layoutX="48.0" layoutY="159.0" prefHeight="336.0" prefWidth="250.0" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="159.0">
+      <TableView fx:id="tableProducts" layoutX="20.0" layoutY="159.0" prefHeight="336.0" prefWidth="335.0" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="159.0">
         <columns>
           <TableColumn fx:id="columnCode" prefWidth="85.0" text="Código" />
-          <TableColumn fx:id="columnName" prefWidth="164.0" text="Nombre" />
+          <TableColumn fx:id="columnName" prefWidth="144.0" text="Nombre" />
+            <TableColumn fx:id="columnPrice" prefWidth="105.0" text="Precio de venta" />
         </columns>
       </TableView>
-      <TextField fx:id="txtSearchProduct" layoutX="96.0" layoutY="52.0" onKeyReleased="#typingProduct" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="txtSearchProduct" layoutX="95.0" layoutY="52.0" onKeyReleased="#typingProduct" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
-      <Label layoutX="52.0" layoutY="54.0" text="Buscar:">
+      <Separator layoutX="307.0" orientation="VERTICAL" prefHeight="551.0" prefWidth="121.0" AnchorPane.bottomAnchor="2.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="51.0" layoutY="54.0" text="Buscar:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Line endX="100.0" layoutX="197.0" layoutY="79.0" startX="-100.0" />
-      <Label layoutX="388.0" layoutY="159.0" text="Código" />
-      <TextField fx:id="txtCode" editable="false" layoutX="372.0" layoutY="180.0" prefHeight="25.0" prefWidth="73.0" />
-      <Button layoutX="330.0" layoutY="448.0" mnemonicParsing="false" onAction="#makeSale" prefHeight="47.0" prefWidth="137.0" text="Hacer venta">
+      <Label layoutX="396.0" layoutY="159.0" text="Código" />
+      <TextField fx:id="txtCode" editable="false" layoutX="380.0" layoutY="180.0" prefHeight="25.0" prefWidth="73.0" />
+      <Button layoutX="385.0" layoutY="448.0" mnemonicParsing="false" onAction="#makeSale" prefHeight="47.0" prefWidth="121.0" text="Hacer venta">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Button>
-      <Label layoutX="447.0" layoutY="110.0" text="Producto">
+      <Label layoutX="470.0" layoutY="110.0" text="Producto">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="520.0" layoutY="159.0" text="Nombre" />
-      <TextField fx:id="txtName" editable="false" layoutX="463.0" layoutY="180.0" prefHeight="25.0" prefWidth="162.0" />
-      <TextField fx:id="txtQuantity" layoutX="374.0" layoutY="252.0" prefHeight="25.0" prefWidth="73.0" />
-      <Label layoutX="384.0" layoutY="235.0" text="Cantidad" />
-      <Label layoutX="80.0" layoutY="110.0" text="Selecciona un producto">
+      <Label layoutX="528.0" layoutY="159.0" text="Nombre" />
+      <TextField fx:id="txtName" editable="false" layoutX="471.0" layoutY="180.0" prefHeight="25.0" prefWidth="162.0" />
+      <TextField fx:id="txtQuantity" layoutX="380.0" layoutY="252.0" onKeyReleased="#typingQuantity" prefHeight="25.0" prefWidth="73.0" />
+      <Label layoutX="390.0" layoutY="235.0" text="Cantidad" />
+      <Label layoutX="94.0" layoutY="110.0" text="Selecciona un producto">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="496.0" layoutY="448.0" mnemonicParsing="false" onAction="#makePurchase" prefHeight="47.0" prefWidth="137.0" text="Hacer compra">
+      <Button layoutX="525.0" layoutY="448.0" mnemonicParsing="false" onAction="#makePurchase" prefHeight="47.0" prefWidth="121.0" text="Hacer compra">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Button>
+      <Label layoutX="514.0" layoutY="227.0" text="Valor de venta" />
+      <TextField fx:id="txtSaleValue" editable="false" layoutX="469.0" layoutY="250.0" prefHeight="25.0" prefWidth="162.0" />
    </children>
 </AnchorPane>

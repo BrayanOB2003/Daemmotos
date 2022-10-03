@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,12 +10,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -24,6 +29,10 @@ import model.Shop;
 public class InventoryController {
 	
 	//View inventory
+	
+	@FXML
+    private Button buttonDelete;
+	
 	@FXML
     private TableColumn<Product, String> columnCode;
 
@@ -46,6 +55,8 @@ public class InventoryController {
     
     private Shop shop;
     
+    private Product selectedProduct;
+    
     public InventoryController(Shop shop) {
     	this.shop = shop;
     	infoController = new ViewInformationController(shop);
@@ -67,11 +78,22 @@ public class InventoryController {
         tableInventory.setItems(data);
         tableInventory.setOnMouseClicked(e->{
         	if(tableInventory.getSelectionModel().getSelectedItem() != null) {
-        		try {
-					showInfoScreen(shop.getProducts().indexOf(tableInventory.getSelectionModel().getSelectedItem()));
-				} catch (IOException e1) {
-					
-				}
+        		
+        		selectedProduct = tableInventory.getSelectionModel().getSelectedItem();
+        		
+        		if(e.getClickCount() == 1){
+        			
+        			buttonDelete.setDisable(false);
+        			
+        		} else if(e.getClickCount() == 2){
+        			try {
+    					showInfoScreen(shop.getProducts().indexOf(selectedProduct));
+    				} catch (IOException e1) {
+    					
+    				}
+        		}
+        		
+        		
         	}
         });
     }
@@ -135,11 +157,26 @@ public class InventoryController {
     
     @FXML
     public void SaveChanges(ActionEvent event) {
-
+    	
     }
 
     @FXML
     public void activeFields(ActionEvent event) {
 
+    }
+    
+    @FXML
+    public void deleteProduct(ActionEvent event) {
+    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    	alert.setHeaderText(null);
+    	alert.setTitle("Confirmación");
+    	alert.setContentText("¿Quieres borrar el producto " + selectedProduct.getName() +   "?");
+    	Optional<ButtonType> action = alert.showAndWait();
+    	if(action.get() == ButtonType.OK) {
+    		shop.getProducts().remove(selectedProduct);
+    		loadInformation();
+    	} else {
+    		
+    	}
     }
 }
